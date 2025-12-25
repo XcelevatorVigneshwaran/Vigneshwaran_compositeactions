@@ -1,0 +1,35 @@
+name: "Java Maven Build"
+
+description: "Setup Java and run Maven build"
+
+inputs:
+
+  java-version:
+
+    description: "Java version"
+
+    required: true
+
+    default: "17"
+
+runs:
+
+  using: "composite"
+
+  steps:
+
+    - name: Setup Java
+
+      uses: actions/setup-java@v4
+
+      with:
+
+        distribution: "temurin"
+
+        java-version: ${{ inputs.java-version }}
+
+    - name: Build with Maven
+
+      run: mvn clean install
+
+      shell: bash
